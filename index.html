@@ -1,0 +1,30 @@
+<html>
+<head>
+  <title>paintIT extension</title>
+
+  <link rel="stylesheet" type="text/css" href="css/PaintIT.css">
+</head>
+<body>
+  
+  <div id="PaintIT" class="dontUse">
+    <h1>PaintIT</h1>
+    <input id="search" class="typeahead dontUse" type="text" placeholder="Search element by id" onkeypress="checkKey();">
+    <div id="labelDiv" class="dontUse">
+      <label class="dontUse">Selected element:</label><br><label id="selected_el" class="dontUse">None.</label>
+    </div>
+    <div id="canvasWrapper">
+      <canvas id="canvas" class="dontUse" width="250" height="250" onclick="canvasClick(event)"></canvas>
+      <div id="currentColor" class="dontUse"></div>
+      <div id="canvasElementsWrapper" class="dontUse"> <p class="dontUse" id="colorParagraph"></p>
+        <p class="dontUse" id="colorSecondParagraph"> </p>
+        <button id="copyBtn" class="dontUse" onclick="copyClick()" type="button">Copy hex</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="js/PaintIT.js"></script>
+
+
+</body>
+</html>
+
