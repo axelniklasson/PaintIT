@@ -31,10 +31,10 @@ function canvasMouseMove(e) {
 
 function updateMarkerPositions(e) {
 	if(canvasLeftMouseIsDown) {
-		leftX = getRelativeX(e, $("#canvasLeftMarker"));
-		leftY = getRelativeY(e, $("#canvasLeftMarker"));
+		leftX = getRelativeX(e, $("#canvasLeftMarker"), $("#canvasLeftBase"));
+		leftY = getRelativeY(e, $("#canvasLeftMarker"), $("#canvasLeftBase"));
 	} else
-		rightY = getRelativeY(e, $("#canvasRightMarker"));
+		rightY = getRelativeY(e, $("#canvasRightMarker"), $("#canvasRight"));
 
 	if(canvasLeftMouseIsDown) {
 		var markerWidthHalf = $("#canvasLeftMarker").width()/2;
@@ -73,15 +73,14 @@ function updateMarkerPositions(e) {
 	}
 }
 
-function getRelativeX(e, element) {
-	return e.clientX - $("#canvasWrapper").offset().left
+function getRelativeX(e, element, canvas) {
+	return e.clientX - $("#canvasWrapper").offset().left 
+		- parseInt($(canvas).css("border-left-width"))
 		- element.width()/2;
 }
 
-function getRelativeY(e, element) {
-	//When running chrome extension the offsetTop seems to be incorrect. Hence
-	//the magic constant.
-	var k = 29;
-	return e.clientY - $("#canvasWrapper").offset().top
-		- element.height()/2 - k;
+function getRelativeY(e, element, canvas) {
+	return e.clientY - $("#canvasLeftBase").offset().top
+		- parseInt($(canvas).css("border-top-width"))
+		- element.height()/2;
 }
