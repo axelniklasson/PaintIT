@@ -1,26 +1,16 @@
-
-var sourceHTML = "";
-
-chrome.extension.onMessage.addListener(function(request, sender) {
-  if (request.action == "getSource") {
-    sourceHTML = request.source;
-    alert('load done');
-  }
+window.onload = findElements;
+$("#searchTextField").keypress(function(e) {
+  checkKey(e);
 });
-
-function onWindowLoad() {
-
-  chrome.tabs.executeScript(null, {
-    file: "js/getPagesSource.js"
-  }, function() {
-    // If you try and inject into an extensions page or the webstore/NTP you'll get an error
-    if (chrome.extension.lastError) {
-      alert('There was an error injecting script : \n' + chrome.extension.lastError.message);
-    }
-  });
-
-}
-
-window.onload = onWindowLoad;
-
-
+$(window).mousemove(function(e){
+	canvasMouseMove(e);
+});
+$(window).mouseup(function(e) {
+  mouseUp();
+});
+$("#canvasLeftBase").mousedown(function(e) {
+  canvasMouseDown(e, true);
+});
+$("#canvasRight").mousedown(function(e) {
+  canvasMouseDown(e, false);
+});

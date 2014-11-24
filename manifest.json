@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "paintIT",
+  "name": "PaintIT",
   "description": "Provides quick and easy access to a color picker to style elements in a web page during development.",
   "version": "0.1",
 

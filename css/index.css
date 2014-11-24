@@ -1,0 +1,203 @@
+hr {
+	float: left;
+	width: 250px;
+	margin-left: -15px;
+	border-top: 1px solid #AAAAAA;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.notSelectable {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+
+#content {
+	width: 250px;
+	padding: 15px;
+}
+#content h1 {
+	margin-top: 0;
+	margin-bottom: 20px;
+	font-size: 22px;
+}
+#searchTextField {
+	width: 100%;
+	font-size: 12px;
+}
+#selectionDisplayWrapper {
+	width: 100%;
+	margin-top: 5px;
+}
+#selectionDisplayWrapper p {
+	float: left;
+	height: 16px;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: normal;
+	margin: 0;
+}
+#selectedItemParagraph {
+	padding-left: 10px;
+}
+#colorTypeWrapper {
+	width: 100%;
+	float: left;
+	margin-bottom: 15px;
+}
+#colorTypeWrapper p {
+	float: left;
+	height: 20px;
+	font-size: 12px;
+	line-height: 20px;
+	font-weight: normal;
+	margin: 0;
+}
+#colorTypeSelector {
+	float: left;
+	height: 20px;
+	width: 150px;
+	margin-left: 10px;
+	font-size: 12px;
+}
+#canvasWrapper {
+	width: 100%;
+}
+#canvasLeftBase {
+	width: 185px;
+	height: 185px;
+	float: left;
+	background: rgb(255,255,255); /* Old browsers */
+	background: -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(255,0,0,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,0,0,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,0,0,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,0,0,1) 100%); /* IE10+ */
+	background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,0,0,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ff0000',GradientType=1 ); /* IE6-9 */
+	box-sizing:border-box;
+  	-moz-box-sizing:border-box;
+  	-webkit-box-sizing:border-box;
+  	border: 1px solid #555555;
+  	border-right: none;
+}
+#canvasLeftGradient {
+	width: 100%;
+	height: 100%;
+	float: left;
+	background-size: 100% 100%;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	background-image: url("../img/leftPicker.png");
+}
+#canvasRight {
+	margin-left: 10px;
+	width: 25px;
+	height: 185px;
+	float: left;
+	background-size: 100% 100%;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	background-image: url("../img/rightPicker.png");
+	box-sizing:border-box;
+  	-moz-box-sizing:border-box;
+  	-webkit-box-sizing:border-box;
+  	border: 1px solid #555555;
+}
+#canvasLeftMarker {
+	width: 14px;
+	height: 14px;
+	float: left;
+	position: relative;
+	top: -7px;
+	left: 177px;
+	background-size: 100% 100%;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	background-image: url("../img/leftMarker.png");
+}
+#canvasRightMarker {
+	width: 100%;
+	height: 10px;
+	float: left;
+	position: relative;
+	top: -5px;
+	background-size: 100% 100%;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	background-image: url("../img/rightMarker.png");
+}
+#currentColorWrapper {
+	float: left;
+	width: 220px;
+	margin-top: 5px;
+}
+#currentColorDiv {
+	width: 50px;
+	height: 50px;
+	float: left;
+	background-color: red;
+	margin-top: 6px;
+}
+#currentColorWrapper .slider {
+	float: left;
+	width: 120px;
+	margin-left: 10px;
+	margin-top: 3px;
+	margin-bottom: 2px;
+}
+#currentColorWrapper .textbox {
+	float: left;
+	width: 30px;
+	margin-left: 10px;
+	height: 18px;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	font-size: 12px;
+}
+#currentColorParagraphWrapper {
+	width: 100%;
+	float: left;
+	margin-top: 2px;
+}
+#currentColorParagraphWrapper p {
+	float: left;
+	height: 16px;
+	line-height: 16px;
+	margin: 0;
+	font-size: 12px;
+	width: 10px;
+}
+#currentColorParagraphWrapper input {
+	float: left;
+	height: 16px;
+	line-height: 16px;
+	margin: 0;
+	font-size: 12px;
+	width: 40px;
+}
+#fontTypeWrapper {
+	width: 100%;
+	float: left;
+	margin-bottom: 15px;
+}
+#fontTypeWrapper p {
+	float: left;
+	height: 20px;
+	font-size: 12px;
+	line-height: 20px;
+	font-weight: normal;
+	margin: 0;
+}
+#fontSelector {
+	float: left;
+	height: 20px;
+	width: 180px;
+	margin-left: 10px;
+	font-size: 12px;
+}

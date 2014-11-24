@@ -1,30 +1,65 @@
 <html>
-<head>
-  <title>paintIT extension</title>
+  <head>
+    <title>PaintIT</title>
 
-  <link rel="stylesheet" type="text/css" href="css/PaintIT.css">
-</head>
-<body>
-  
-  <div id="PaintIT" class="dontUse">
-    <h1>PaintIT</h1>
-    <input id="search" class="typeahead dontUse" type="text" placeholder="Search element by id" onkeypress="checkKey();">
-    <div id="labelDiv" class="dontUse">
-      <label class="dontUse">Selected element:</label><br><label id="selected_el" class="dontUse">None.</label>
-    </div>
-    <div id="canvasWrapper">
-      <canvas id="canvas" class="dontUse" width="250" height="250" onclick="canvasClick(event)"></canvas>
-      <div id="currentColor" class="dontUse"></div>
-      <div id="canvasElementsWrapper" class="dontUse"> <p class="dontUse" id="colorParagraph"></p>
-        <p class="dontUse" id="colorSecondParagraph"> </p>
-        <button id="copyBtn" class="dontUse" onclick="copyClick()" type="button">Copy hex</button>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+  </head>
+  <body class="notSelectable">
+    <div id="content" class="PaintIT_ignore">
+      <input id="searchTextField" class="typeahead PaintIT_ignore" type="text" placeholder="Find element by id">
+      <div id="selectionDisplayWrapper" class="PaintIT_ignore">
+        <p class="PaintIT_ignore">Selected element:</p><p id="selectedItemParagraph" class="PaintIT_ignore"></p>
       </div>
+      <hr>
+      <div id="canvasWrapper" class="PaintIT_ignore notSelectable">
+        <div id="colorTypeWrapper">
+          <p>Color type:</p>
+          <select id="colorTypeSelector" class="form-control">
+            <option>Background</option>
+            <option>Foreground</option>
+            <option>Border</option>
+            <option>Box-shadow</option>
+          </select>
+        </div>
+        <div id="canvasLeftBase" class="PaintIT_ignore notSelectable">
+          <div id="canvasLeftGradient" class="PaintIT_ignore notSelectable">
+            <div id="canvasLeftMarker" class="PaintIT_ignore notSelectable"></div>
+          </div>
+        </div>
+        <div id="canvasRight" class="PaintIT_ignore notSelectable">
+          <div id="canvasRightMarker" class="PaintIT_ignore notSelectable"></div>
+        </div>
+        <div id="currentColorWrapper" class="PaintIT_ignore notSelectable">
+          <div id="currentColorDiv" class="PaintIT_ignore notSelectable"></div>
+          <input id="sliderR" type="range"  min="0" max="255" value="255" class="PaintIT_ignore notSelectable slider" />
+          <input id="textR" type="text" class="PaintIT_ignore notSelectable textbox" value="255" />
+          <input id="sliderG" type="range"  min="0" max="255" value="0" class="PaintIT_ignore notSelectable slider" />
+          <input id="textG" type="text" class="PaintIT_ignore notSelectable textbox" value="0" />
+          <input id="sliderB" type="range"  min="0" max="255" value="0" class="PaintIT_ignore notSelectable slider" />
+          <input id="textB" type="text" class="PaintIT_ignore notSelectable textbox" value="0" />
+        </div>
+        <div id="currentColorParagraphWrapper" class="PaintIT_ignore">
+            <p class="PaintIT_ignore">#</p>
+            <input type="text" class="PaintIT_ignore" id="currentColorHex" value="FF0000"/>
+        </div>
+      </div>
+      <hr>
+      <div id="fontTypeWrapper">
+          <p>Font:</p>
+          <select id="fontSelector" class="form-control">
+            <option>Helvetica Nue</option>
+            <option>Helvetica</option>
+            <option>Arial</option>
+            <option>Trebuchet MS</option>
+          </select>
+        </div>
     </div>
-  </div>
-
-  <script type="text/javascript" src="js/PaintIT.js"></script>
-
-
-</body>
+    <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/canvas.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
 </html>
-
