@@ -36,6 +36,21 @@ chrome.extension.onMessage.addListener(function(request, sender) {
   }
 });
 
+function checkKey(event) {
+  var key = window.event.keyCode;
+  
+  if (key == 13) { // Enter
+    elementSelected();
+  }
+  return true;
+}
+
+function elementSelected(event) {
+  var el = document.getElementById("searchTextField");
+  var label = document.getElementById("selectedItemParagraph");
+  label.innerHTML = el.value;
+}
+
 var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
     var matches, substrRegex;
