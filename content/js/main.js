@@ -1,4 +1,3 @@
-window.onload = findElements;
 $("#searchTextField").keypress(function(e) {
   checkKey(e);
 });

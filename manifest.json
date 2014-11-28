@@ -11,5 +11,6 @@
   "icons": {
     "128": "content/img/icon128.png"
   },
-  "permissions": ["tabs", "<all_urls>"]
+  "permissions": ["tabs", "activeTab", "<all_urls>"],
+  "web_accessible_resources": ["getElements.js"]
 }
