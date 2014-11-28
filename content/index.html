@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Droid+Sans|Lato|PT+Sans|Open+Sans|Roboto|Oswald|Roboto+Condensed|Open+Sans+Condensed:300|Raleway' rel='stylesheet' type='text/css'>
   </head>
   <body class="notSelectable">
     <div id="content" class="PaintIT_ignore">
@@ -54,18 +55,26 @@
       </div>
       <hr>
       <div id="fontTypeWrapper">
-          <p>Font:</p>
+          <p id="fontTitle">Font:</p>
           <select id="fontSelector" class="form-control">
-            <option>Helvetica Nue</option>
-            <option>Helvetica</option>
-            <option>Arial</option>
-            <option>Trebuchet MS</option>
+            <option id="droidSans">Droid Sans</option>
+            <option id="lato">Lato</option>
+            <option id="openSans">Open Sans</option>
+            <option id="openSansCondensed">Open Sans Condensed</option>
+            <option id="oswald">Oswald</option>
+            <option id="raleway">Raleway</option>
+            <option id="roboto">Roboto</option>
+            <option id="robotoCondensed">Roboto Condensed</option>
+            <option id="ptSans">PT Sans</option>
+            <option id="sourceSansPro">Source Sans Pro</option>
           </select>
+          <p id="preview">The quick brown fox..</p>
         </div>
     </div>
     <script type="text/javascript" src="js/search.js"></script> 
     <script type="text/javascript" src="js/canvasMarker.js"></script>
     <script type="text/javascript" src="js/color.js"></script>
+    <script type="text/javascript" src="js/font.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>

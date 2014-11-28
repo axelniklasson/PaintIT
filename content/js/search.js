@@ -9,6 +9,8 @@ var id = "";
 
 function initElements() {
 
+    document.getElementById("fontSelector").addEventListener("change",updateFont);
+
     chrome.tabs.executeScript(null, {file: "content/js/getElements.js"}, function() {
         // If you try and inject into an extensions page or the webstore/NTP you'll get an error
         if (chrome.extension.lastError) {

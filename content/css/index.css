@@ -188,7 +188,7 @@ hr {
 	float: left;
 	margin-bottom: 15px;
 }
-#fontTypeWrapper p {
+#fontTitle {
 	float: left;
 	height: 20px;
 	font-size: 12px;
@@ -329,3 +329,17 @@ p + p {
 .tt-suggestion p {
 	margin: 0;
 }
+
+/* Fonts */
+
+#preview {
+	font-family: 'Droid Sans';
+	font-size: 130%;
+	padding-top: 14%;
+}
+
+
+
+
+
+
