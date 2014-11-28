@@ -17,14 +17,3 @@ function checkKey(event) {
   }
   return true;
 }
-
-function findElements() {
-  chrome.tabs.executeScript(null, {
-    file: "js/getElements.js"
-      }, function() {
-      // If you try and inject into an extensions page or the webstore/NTP you'll get an error
-      if (chrome.extension.lastError) {
-          alert('There was an error injecting script : \n' + chrome.extension.lastError.message);
-      }
-  });
-}
