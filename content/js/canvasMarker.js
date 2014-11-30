@@ -1,6 +1,8 @@
 var canvasLeftMouseIsDown = false;
 var canvasRightMouseIsDown = false;
 
+var sliderDown = false;
+
 var leftMarker = $("#canvasLeftMarker");
 var rightMarker = $("#canvasRightMarker");
 var leftCanvas = $("#canvasLeftBase");
@@ -9,6 +11,10 @@ var rightCanvas = $("#canvasRight");
 function mouseUp() {
 	canvasLeftMouseIsDown = false;
 	canvasRightMouseIsDown = false;
+	if(sliderDown) {
+		sliderUpdate();
+		sliderDown = false;
+	}
 }
 
 function canvasMouseDown(e, left) {
@@ -25,10 +31,16 @@ function canvasMouseDown(e, left) {
 	}
 }
 
-function canvasMouseMove(e) {
-	//e.stopPropagation();
+function sliderMouseDown() {
+	sliderDown = true;
+	sliderUpdate();
+}
+
+function mouseMove(e) {
 	if(canvasLeftMouseIsDown || canvasRightMouseIsDown)
 		updateMarkerPositions(e);
+	else if(sliderDown)
+		sliderUpdate();
 }
 
 function updateMarkerPositions(e) {
