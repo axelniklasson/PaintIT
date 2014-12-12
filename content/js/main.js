@@ -24,18 +24,14 @@ $("#sliderB").mousedown(function(e) {
   sliderMouseDown();
 });
 $(window).keydown(function(e) {
-  if(e.keyCode == 9)
-  	toggleVisibility();	
+	toggleVisibility(e);	
 });
 $("#textR").keydown(function(e) {
-  if(e.keyCode == 13)
-  	textboxUpdate();
+	textKeyDown(e, $("#textR"));
 });
 $("#textG").keydown(function(e) {
-  if(e.keyCode == 13)
-  	textboxUpdate();
+  	textKeyDown(e, $("#textG"));
 });
 $("#textB").keydown(function(e) {
-  if(e.keyCode == 13)
-  	textboxUpdate();
+  	textKeyDown(e, $("#textB"));
 });
