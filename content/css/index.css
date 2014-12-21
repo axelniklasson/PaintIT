@@ -185,6 +185,7 @@ hr {
 	height: 16px;
 	line-height: 16px;
 	margin: 0;
+	margin-left: -10px;
 	font-size: 12px;
 	width: 10px;
 }
@@ -194,7 +195,7 @@ hr {
 	line-height: 16px;
 	margin: 0;
 	font-size: 12px;
-	width: 40px;
+	width: 50px;
 }
 #fontTypeWrapper {
 	width: 100%;

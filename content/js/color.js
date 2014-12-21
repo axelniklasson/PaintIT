@@ -9,6 +9,9 @@ var botRightCorner = [0, 0, 0];
 
 var prevSliderRGB = [255,0,0];
 
+var validSyntaxForeground = "black";
+var invalidSyntaxForeground = "rgb(250, 58, 58)";
+
 var sectionDivisors = [
 	[255, 0, 0],
 	[255, 0, 255],
@@ -34,7 +37,6 @@ function leftMarkerPositionChanged(x, y) {
 			parseInt(drgb[1] * (1 - percentageY)),
 			parseInt(drgb[2] * (1 - percentageY))];
 
-	currentSelectedColor = rgbWithDarkness;
 	leftMarkerPosition = [x, y];
 
 	updateUI(rgbWithDarkness[0], rgbWithDarkness[1], rgbWithDarkness[2]);
@@ -53,6 +55,7 @@ function calculateDifferenceToWhite(percentageX) {
 }
 
 function updateUI(r, g, b) {
+	currentSelectedColor = [r,g,b];
 	$("#currentColorDiv").css("background-color", "rgb(" + r + "," + g + "," + b + ")");
 	$("#sliderR").val(r);
 	$("#sliderG").val(g);
@@ -126,22 +129,12 @@ function paintSectionColor(r, g, b) {
 	$("#canvasLeftBase").css("background",'linear-gradient(to right,  rgba(255,255,255,1) 0%,' + rgbaString + ' 100%)');
 }
 
-function textboxUpdate(r, g, b) {
-	$("#sliderR").val(r);
-	$("#sliderG").val(g);
-	$("#sliderB").val(b);
-	sliderUpdate();
+function sliderUpdate() {
+	colorUpdate($("#sliderR").val(), $("#sliderG").val(), $("#sliderB").val());
 }
 
-function sliderUpdate() {
-	var r = $("#sliderR").val();
-	var g = $("#sliderG").val();
-	var b = $("#sliderB").val();
+function colorUpdate(r,g,b) {
 	if(r != prevSliderRGB[0] || g != prevSliderRGB[1] || b != prevSliderRGB[2]) {
-		$("#textR").val(r);
-		$("#textG").val(g);
-		$("#textB").val(b);
-
 		prevSliderRGB = [r, g, b];
 		changeColorBasedOnSlider();
 	}
@@ -185,7 +178,7 @@ function calculateMiddleValue(sorted) {
 	var percentage = differenceMiddleLowest / differenceHighestLowest;
 	var newVal = Math.round(percentage * 255);
 	if(isNaN(newVal))
-		return [0, 0, 255];
+		return [255, 0, 0];
 	else
 		return [0, newVal, 255];
 }
@@ -203,13 +196,11 @@ function hexToInt(hex){
 }
 
 function textKeyDown(e, element) {
-	var success = "black";
-	var fail = "rgb(250, 58, 58)";
 	if(e.keyCode == 13) {
 		var r = "" + $("#textR").val();
 		var g = "" + $("#textG").val();
 		var b = "" + $("#textB").val();
-
+		
 		r = +r;
 		g = +g;
 		b = +b;
@@ -220,38 +211,39 @@ function textKeyDown(e, element) {
 			b = parseInt(b);
 			if(r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
 				if(r != prevSliderRGB[0] || g != prevSliderRGB[1] || b != prevSliderRGB[2])
-					textboxUpdate(r, g, b);
+					colorUpdate(r, g, b);
 				else {
 					$("#textR").css("font-weight", "normal");
-					$("#textR").css("color", success);
+					$("#textR").css("color", validSyntaxForeground);
 					$("#textG").css("font-weight", "normal");
-					$("#textG").css("color", success);
+					$("#textG").css("color", validSyntaxForeground);
 					$("#textB").css("font-weight", "normal");
-					$("#textB").css("color", success);
+					$("#textB").css("color", validSyntaxForeground);
 				}
+
+				prevTextR = r;
+				prevTextG = g;
+				prevTextB = b;				
+
 				return;
 			}
 		}
 
 		if(isNaN(r) || r < 0 || r > 255)
-			$("#textR").css("color", fail);
+			$("#textR").css("color", invalidSyntaxForeground);
 		if(isNaN(g) || g < 0 || g > 255)
-			$("#textG").css("color", fail);
+			$("#textG").css("color", invalidSyntaxForeground);
 		if(isNaN(b) || b < 0 || b > 255)
-			$("#textB").css("color", fail);
+			$("#textB").css("color", invalidSyntaxForeground);
 
 		$("#textR").css("font-weight", "normal");
 		$("#textG").css("font-weight", "normal");
 		$("#textB").css("font-weight", "normal");
 
 	} else {
-		element.css("color", success)
+		element.css("color", validSyntaxForeground);
 		element.css("font-weight", "bold");
 	}
-}
-
-function updateLeftMarkerPosition() {
-
 }
 
 function updateRightMarkerPosition() {
@@ -284,13 +276,13 @@ function calculateYBasedOnSectionIndexes(sections) {
 	var s1 = sectionDivisors[sections[0]];
 	var s2 = sectionDivisors[sections[1]];
 
-	var dr = Math.abs(s1[0] - s2[0]);
-	var dg = Math.abs(s1[1] - s2[1]);
-	var db = Math.abs(s1[2] - s2[2]);
+	var dr = Math.abs(s1[0] - currentMainColor[0]);
+	var dg = Math.abs(s1[1] - currentMainColor[1]);
+	var db = Math.abs(s1[2] - currentMainColor[2]);
 
-	var percentR = currentMainColor[0] / dr;
-	var percentG = currentMainColor[1] / dg;
-	var percentB = currentMainColor[2] / db;
+	var percentR = dr / 255;
+	var percentG = dg / 255;
+	var percentB = db / 255;
 
 	var rightCanvasHeight = $("#canvasRight").height();
 	var sectionHeight = rightCanvasHeight / (sectionDivisors.length - 1);
@@ -306,12 +298,92 @@ function calculateYBasedOnSectionIndexes(sections) {
 			currentMainColor[2] == s2[2])
 		return sections[1] * sectionHeight - rightMarkerHeight / 2;
 
-	if(isFinite(percentR))
+	if(isFinite(percentR) && percentR != 0)
 		return sections[0] * sectionHeight + percentR * sectionHeight - rightMarkerHeight / 2;
-	else if(isFinite(percentG))
+	else if(isFinite(percentG) && percentG != 0)
 		return sections[0] * sectionHeight + percentG * sectionHeight - rightMarkerHeight / 2;
-	else if(isFinite(percentB))
+	else if(isFinite(percentB) && percentB != 0)
 		return sections[0] * sectionHeight + percentB * sectionHeight - rightMarkerHeight / 2;
 	else
 		return sections[0] * sectionHeight;
+}
+
+function updateLeftMarkerPosition() {
+	var canvasWidth = $("#canvasLeftBase").width();
+	var canvasHeight = $("#canvasLeftBase").height();
+	var markerWidth = $("#canvasLeftMarker").width();
+	var markerHeight = $("#canvasLeftMarker").height();
+
+	var highestIndex = -1;
+	var lowestIndex = -1;
+
+	if(currentMainColor[0] == 255)
+		highestIndex = 0;
+	else if(currentMainColor[1] == 255)
+		highestIndex = 1;
+	else
+		highestIndex = 2;
+
+	if(currentMainColor[0] == 0)
+		lowestIndex = 0;
+	else if(currentMainColor[1] == 0)
+		lowestIndex = 1;
+	else
+		lowestIndex = 2;
+
+	var selectedLowest = currentSelectedColor[lowestIndex]
+	var selectedHighest = currentSelectedColor[highestIndex]
+
+	var xPercent = 1 - selectedLowest / selectedHighest;
+	var yPercent = (255 - selectedHighest) / 255;
+
+	var x = xPercent * canvasWidth - markerWidth / 2;
+	var y = yPercent * canvasHeight - markerHeight / 2;
+
+	$("#canvasLeftMarker").css("left", x + "px");
+	$("#canvasLeftMarker").css("top", y + "px");
+}
+
+function currentColorHexKeyDown(e) {
+	var hexTextBox = $("#currentColorHex");
+
+	if(e.keyCode == 13) {
+		if(validHexData(hexTextBox.val())) {
+			hexTextBox.css("color", validSyntaxForeground);
+			hexTextBox.css("font-weight", "normal");
+			var color = generateColorFromHex(hexTextBox.val());
+			colorUpdate(color[0], color[1], color[2]);
+		} else {
+			hexTextBox.css("color", invalidSyntaxForeground);
+			hexTextBox.css("font-weight", "normal");
+		}
+	} else {
+		hexTextBox.css("color", validSyntaxForeground);
+		hexTextBox.css("font-weight", "bold");
+	}
+}
+
+function validHexData(data) {
+	if(data.length == 6) {
+		for(var i = 0; i < 6; i++) {
+			if(!charIsHexValid(data.substring(i,i+1)))
+				return false;
+		}
+		return true;
+	}
+	return false;
+}
+
+function generateColorFromHex(data) {
+	return [hexToInt(data.substring(0,2).toUpperCase()), 
+			hexToInt(data.substring(2,4).toUpperCase()), 
+			hexToInt(data.substring(4,6).toUpperCase())];
+}
+
+function charIsNumerical(c) {
+	return /[0-9]/.test(c);
+}
+
+function charIsHexValid(c) {
+	return /[a-fA-F0-9]/.test(c);
 }

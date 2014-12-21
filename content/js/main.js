@@ -35,3 +35,6 @@ $("#textG").keydown(function(e) {
 $("#textB").keydown(function(e) {
   	textKeyDown(e, $("#textB"));
 });
+$("#currentColorHex").keydown(function(e) {
+    currentColorHexKeyDown(e);
+});
